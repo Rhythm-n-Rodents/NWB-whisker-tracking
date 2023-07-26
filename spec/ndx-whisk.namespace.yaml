@@ -1,0 +1,14 @@
+namespaces:
+- author:
+  - Vincent Prevosto
+  contact:
+  - prevosto@mit.edu
+  doc: NWB extension to store whisker tracking measurements computed with Whisk (Janelia
+    Whisker Tracker) or other video-based whisker tracking methods.
+  name: ndx-whisk
+  schema:
+  - namespace: core
+    neurodata_types:
+    - ElectricalSeries
+  - source: ndx-whisk.extensions.yaml
+  version: 0.1.0
