@@ -33,6 +33,7 @@ setup_args = {
     'install_requires': [
         'pynwb>=1.5.0,<3',
         'hdmf>=2.5.6,<4',
+        'whiskiwrap @ git+https://github.com/vncntprvst/WhiskiWrap.git@master'
     ],
     'packages': find_packages('src/pynwb', exclude=["tests", "tests.*"]),
     'package_dir': {'': 'src/pynwb'},

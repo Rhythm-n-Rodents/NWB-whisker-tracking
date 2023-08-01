@@ -1,8 +1,73 @@
 groups:
-- neurodata_type_def: TetrodeSeries
-  neurodata_type_inc: ElectricalSeries
-  doc: An extension of ElectricalSeries to include the tetrode ID for each time series.
-  attributes:
-  - name: trode_id
+- neurodata_type_def: WhiskerMeasurementTable
+  neurodata_type_inc: DynamicTable
+  doc: A table for storing whisker measurements computed with Whisk.
+  datasets:
+  - name: frame_id
+    neurodata_type_inc: VectorData
     dtype: int32
-    doc: The tetrode ID.
+    doc: The frame ID
+  - name: whisker_id
+    neurodata_type_inc: VectorData
+    dtype: int16
+    doc: The whisker ID
+  - name: label
+    neurodata_type_inc: VectorData
+    dtype: int16
+    doc: The label assigned to the whisker
+    quantity: '?'
+  - name: tip_x
+    neurodata_type_inc: VectorData
+    dtype: float32
+    doc: The x coordinate of the whisker tip
+  - name: tip_y
+    neurodata_type_inc: VectorData
+    dtype: float32
+    doc: The y coordinate of the whisker tip
+  - name: follicle_x
+    neurodata_type_inc: VectorData
+    dtype: float32
+    doc: The x coordinate of the whisker follicle
+  - name: follicle_y
+    neurodata_type_inc: VectorData
+    dtype: float32
+    doc: The y coordinate of the whisker follicle
+  - name: angle
+    neurodata_type_inc: VectorData
+    dtype: float32
+    doc: The angle of the whisker
+  - name: pixel_length
+    neurodata_type_inc: VectorData
+    dtype: int16
+    doc: The length of the whisker in pixels
+    quantity: '?'
+  - name: length
+    neurodata_type_inc: VectorData
+    dtype: float32
+    doc: The length of the whisker in mm
+    quantity: '?'
+  - name: score
+    neurodata_type_inc: VectorData
+    dtype: float32
+    doc: The score of the whisker
+    quantity: '?'
+  - name: curvature
+    neurodata_type_inc: VectorData
+    dtype: float32
+    doc: The curvature of the whisker
+    quantity: '?'
+  - name: chunk_start
+    neurodata_type_inc: VectorData
+    dtype: int32
+    doc: The index of the first frame of the chunk
+    quantity: '?'
+  - name: face_x
+    neurodata_type_inc: VectorData
+    dtype: int32
+    doc: The x coordinate of the face
+    quantity: '?'
+  - name: face_y
+    neurodata_type_inc: VectorData
+    dtype: int32
+    doc: The y coordinate of the face
+    quantity: '?'

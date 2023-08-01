@@ -9,6 +9,7 @@ namespaces:
   schema:
   - namespace: core
     neurodata_types:
-    - ElectricalSeries
+    - DynamicTable
+    - VectorData
   - source: ndx-whisk.extensions.yaml
   version: 0.1.0

@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import os.path
 
-from pynwb.spec import NWBNamespaceBuilder, export_spec, NWBGroupSpec, NWBAttributeSpec
-# TODO: import other spec classes as needed
-# from pynwb.spec import NWBDatasetSpec, NWBLinkSpec, NWBDtypeSpec, NWBRefSpec
+from pynwb.spec import NWBNamespaceBuilder, export_spec, NWBGroupSpec, NWBAttributeSpec, NWBDatasetSpec
 
 
 def main():
@@ -16,33 +14,117 @@ def main():
         contact=list(map(str.strip, """prevosto@mit.edu""".split(',')))
     )
 
-    # TODO: specify the neurodata_types that are used by the extension as well
-    # as in which namespace they are found.
-    # this is similar to specifying the Python modules that need to be imported
-    # to use your new data types.
-    # all types included or used by the types specified here will also be
-    # included.
-    ns_builder.include_type('ElectricalSeries', namespace='core')
+    ns_builder.include_type('DynamicTable', namespace='core')
+    ns_builder.include_type('VectorData', namespace='core')
 
-    # TODO: define your new data types
-    # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb
-    # for more information
-    tetrode_series = NWBGroupSpec(
-        neurodata_type_def='TetrodeSeries',
-        neurodata_type_inc='ElectricalSeries',
-        doc=('An extension of ElectricalSeries to include the tetrode ID for '
-             'each time series.'),
-        attributes=[
-            NWBAttributeSpec(
-                name='trode_id',
-                doc='The tetrode ID.',
-                dtype='int32'
-            )
-        ],
+    # see https://pynwb.readthedocs.io/en/latest/extensions.html#extending-nwb for more information
+    whisker_meas = NWBGroupSpec(
+        neurodata_type_def='WhiskerMeasurementTable',
+        neurodata_type_inc='DynamicTable',
+        doc=('A table for storing whisker measurements computed with Whisk.'),
+            datasets=[
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='frame_id',
+                    doc='The frame ID',
+                    dtype='int32'
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='whisker_id',
+                    doc='The whisker ID',
+                    dtype='int16'
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='label',
+                    doc='The label assigned to the whisker',
+                    dtype='int16',
+                    quantity = "?"
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='tip_x',
+                    doc='The x coordinate of the whisker tip',
+                    dtype='float32'
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='tip_y',
+                    doc='The y coordinate of the whisker tip',
+                    dtype='float32'
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='follicle_x',
+                    doc='The x coordinate of the whisker follicle',
+                    dtype='float32'
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='follicle_y',
+                    doc='The y coordinate of the whisker follicle',
+                    dtype='float32'
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='angle',
+                    doc='The angle of the whisker',
+                    dtype='float32'
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='pixel_length',
+                    doc='The length of the whisker in pixels',
+                    dtype='int16',
+                    quantity = "?"
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='length',
+                    doc='The length of the whisker in mm',
+                    dtype='float32',
+                    quantity = "?"
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='score',
+                    doc='The score of the whisker',
+                    dtype='float32',
+                    quantity = "?"
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='curvature',
+                    doc='The curvature of the whisker',
+                    dtype='float32',
+                    quantity = "?"
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='chunk_start',
+                    doc='The index of the first frame of the chunk',
+                    dtype='int32',
+                    quantity = "?"
+                ),  
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='face_x',
+                    doc='The x coordinate of the face',
+                    dtype='int32',
+                    quantity = "?"
+                ),
+                NWBDatasetSpec(
+                    neurodata_type_inc='VectorData',
+                    name='face_y',
+                    doc='The y coordinate of the face',
+                    dtype='int32',
+                    quantity = "?"
+                ),
+            ],
     )
 
-    # TODO: add all of your new data types to this list
-    new_data_types = [tetrode_series]
+    new_data_types = [whisker_meas]
 
     # export the spec to yaml files in the spec folder
     output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'spec'))
