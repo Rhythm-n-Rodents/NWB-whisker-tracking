@@ -27,19 +27,19 @@ def main():
                     neurodata_type_inc='VectorData',
                     name='frame_id',
                     doc='The frame ID',
-                    dtype='int32'
+                    dtype='uint32'
                 ),
                 NWBDatasetSpec(
                     neurodata_type_inc='VectorData',
                     name='whisker_id',
                     doc='The whisker ID',
-                    dtype='int16'
+                    dtype='uint16'
                 ),
                 NWBDatasetSpec(
                     neurodata_type_inc='VectorData',
                     name='label',
                     doc='The label assigned to the whisker',
-                    dtype='int16',
+                    dtype='uint16',
                     quantity = "?"
                 ),
                 NWBDatasetSpec(
@@ -76,7 +76,7 @@ def main():
                     neurodata_type_inc='VectorData',
                     name='pixel_length',
                     doc='The length of the whisker in pixels',
-                    dtype='int16',
+                    dtype='uint16',
                     quantity = "?"
                 ),
                 NWBDatasetSpec(
@@ -104,7 +104,7 @@ def main():
                     neurodata_type_inc='VectorData',
                     name='chunk_start',
                     doc='The index of the first frame of the chunk',
-                    dtype='int32',
+                    dtype='uint32',
                     quantity = "?"
                 ),  
                 NWBDatasetSpec(
