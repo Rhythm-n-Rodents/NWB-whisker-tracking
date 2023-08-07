@@ -1,4 +1,5 @@
-# pinned dependencies to reproduce a working development environment
+#### Dependencies ####
+# Usage: pip install -r requirements.txt
 hdmf==3.8.1
 pynwb==2.4.0
 whiskiwrap @ git+https://github.com/vncntprvst/WhiskiWrap.git
