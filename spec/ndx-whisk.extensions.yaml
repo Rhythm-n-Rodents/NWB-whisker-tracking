@@ -5,15 +5,15 @@ groups:
   datasets:
   - name: frame_id
     neurodata_type_inc: VectorData
-    dtype: int32
+    dtype: uint32
     doc: The frame ID
   - name: whisker_id
     neurodata_type_inc: VectorData
-    dtype: int16
+    dtype: uint16
     doc: The whisker ID
   - name: label
     neurodata_type_inc: VectorData
-    dtype: int16
+    dtype: uint16
     doc: The label assigned to the whisker
     quantity: '?'
   - name: tip_x
@@ -38,7 +38,7 @@ groups:
     doc: The angle of the whisker
   - name: pixel_length
     neurodata_type_inc: VectorData
-    dtype: int16
+    dtype: uint16
     doc: The length of the whisker in pixels
     quantity: '?'
   - name: length
@@ -58,7 +58,7 @@ groups:
     quantity: '?'
   - name: chunk_start
     neurodata_type_inc: VectorData
-    dtype: int32
+    dtype: uint32
     doc: The index of the first frame of the chunk
     quantity: '?'
   - name: face_x
