@@ -114,3 +114,6 @@ venv.bak/
 
 # Mac finder
 .DS_Store
+
+# Whisk specific files and folders
+d
