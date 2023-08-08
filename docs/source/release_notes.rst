@@ -2,4 +2,4 @@ Release Notes
 =============
 
 .. note::
-    Add the release notes of your extension here
+    0.1.0 - Initial release. Tested on Linux / WSL2. Installs WhiskiWrap by default (this will be made optional if other whisker tracking methods than whisk are added in the future).
