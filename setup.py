@@ -22,7 +22,7 @@ except Exception:
 
 setup_args = {
     'name': 'ndx-whisk',
-    'version': '0.1.0',
+    'version': '0.1.1',
     'description': 'NWB extension to store whisker tracking measurements computed with Whisk (Janelia Whisker Tracker) or other video-based whisker tracking methods.',
     'long_description': readme,
     'long_description_content_type': readme_type,
@@ -33,7 +33,7 @@ setup_args = {
     'install_requires': [
         'pynwb>=1.5.0,<3',
         'hdmf>=2.5.6,<4',
-        'whiskiwrap @ git+https://github.com/vncntprvst/WhiskiWrap.git@master'
+        'WhiskiWrap'
     ],
     'packages': find_packages('src/pynwb', exclude=["tests", "tests.*"]),
     'package_dir': {'': 'src/pynwb'},
