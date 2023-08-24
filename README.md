@@ -11,28 +11,39 @@ ndx-whisk is an [NWB](https://www.nwb.org/) extension to store whisker tracking 
 See test script `test_whiskermeasurement.py` in `src/pynwb/tests`.  
 
 ```python
+import os
+import numpy as np
 from pynwb import NWBHDF5IO, NWBFile
 from ndx_whisk import WhiskerMeasurementTable
-import numpy as np
+from WhiskiWrap.base import read_whisker_data
 
-# Load your data
-whisker_data = read_whisker_measurement_table('tracked_data.whiskers')
+#### Set the session parameters
+baseName = 'session_name'
+whiskerTrackingPath = 'my/path/to/whisker/tracking/files/'
+
+# List all .whiskers files starting with baseName in the whiskerTrackingPath
+whiskers_files = [f for f in os.listdir(whiskerTrackingPath) if f.startswith(baseName) and f.endswith('.whiskers')]
 
 # Create a WhiskerMeasurementTable
 whisker_meas = WhiskerMeasurementTable(
-    name='name',
-    description='description'
+    name=whiskers_files[0][:-9],
+    description='whisk measurements from whisker tracking'
 )
 
-# Add data to the WhiskerMeasurementTable
-for i in range(np.shape(whisker_data['frame_id'])[0]):
-    whisker_meas.add_row({k: whisker_data[k][i] for k in whisker_data.keys()})
-    
-# Set up a NWB file
-nwbfile = set_up_nwbfile()
-path = 'tracked_data.nwb'
+# load all files in the list
+for i in range(len(whiskers_files)):
+    whisker_data = read_whisker_data(os.path.join(whiskerTrackingPath, whiskers_files[i]))
 
-# Add a ProcessingModule for behavioral data
+    # Add data to the WhiskerMeasurementTable
+    for i in range(np.shape(whisker_data['frame_id'])[0]):
+        whisker_meas.add_row({k: whisker_data[k][i] for k in whisker_data.keys()})
+        
+    print('File ' + str(i+1) + ' of ' + str(len(whiskers_files)) + ' loaded.') 
+
+# save file as baseName + '.nwb' in the whiskerTrackingPath 
+save_path = os.path.join(whiskerTrackingPath, baseName + '.nwb') 
+
+# # Open or set up a NWB file object, and add a ProcessingModule for behavioral data
 behavior_module = nwbfile.create_processing_module(
     name="behavior", description="Processed behavioral data"
 )
@@ -41,7 +52,7 @@ behavior_module = nwbfile.create_processing_module(
 nwbfile.processing['behavior'].add(whisker_meas)
 
 # Save to NWB file
-with NWBHDF5IO(path, mode='w') as io:
+with NWBHDF5IO(save_path, mode='w') as io:
     io.write(nwbfile)
 ```
 
